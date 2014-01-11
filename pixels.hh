@@ -5,13 +5,17 @@
 
 #include "public.h"
 
+/* TODO: move fb0 to derived class keeping base class agnostic */
+
 class pixels{
 private:
-  U8 far *base;		// base adress
+  U8    *base;		// base adress
   U32   prows;		// pixels per row
   U32	pkols;		// pixel rows on screen
   U16	pdept;		// bits per pixel ( color screens )
+  U16   pbytes;         // bytes per pixel
   U32	pcurcol;	// current pixel value (color)
+  int  fb0;            /* framebuffer decriptor */
 public:
 	pixels();
 	~pixels();
