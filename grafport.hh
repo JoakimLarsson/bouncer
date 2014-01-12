@@ -11,7 +11,7 @@ private:
   S16 xdiv, ydiv;
   S16 xofs, yofs;
 public:
-       grafport();
+  grafport();
   void set_xfac(S32 i){xfac = i;};
   void set_yfac(S32 i){yfac = i;};
   void set_fac(S32 i){xfac = i; yfac = i;};
@@ -21,7 +21,7 @@ public:
   void set_xofs(S32 i){xofs = i;};
   void set_yofs(S32 i){yofs = i;};
   void set_ofs(S32 i){xofs = i; yofs = i;};
-  void portline(U32 x1, U32 y1, U32 x2, U32 y2);
+  void pline(U32 x1, U32 y1, U32 x2, U32 y2);
 };
 
 #endif
