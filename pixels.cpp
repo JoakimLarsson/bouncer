@@ -73,12 +73,61 @@ void  pixels::set_color(U32 c)
 
 void pixels::line(U32 x1, U32 y1, U32 x2, U32 y2)
 {
+  int dx,dy,p,const1, const2, x, y, sign, end;
 
-#if DEBUG
-  fprintf(debugio, "pline: %6ld %6ld %6ld %6ld \n", x1, y1, x2, y2);
-#endif
+  dx = abs(x1 - x2);
+  dy = abs(y1 - y2);
 
-#if BORLAND
-  line( (int) x1, (int) y1, (int) x2, (int) y2);
-#endif
+  if (dx > dy){
+    if (x1 > x2){
+      x = x2; x2 = x1; x1 = x;
+      y = y2; y2 = y1; y1 = y;
+    }
+    else{
+      x = x1;
+      y = y1;
+    }
+    set_pixel(x, y);
+    end = x2;
+    sign = y2 < y1 ? -1 : 1;
+    p = 2 * dy - dx;
+    const1 = 2 * dy;
+    const2 = 2 * (dy - dx);
+    while (x < end){
+      x++;
+      if (p < 0)
+        p += const1;
+      else{
+        y += sign;
+        p += const2;
+      }
+      set_pixel(x, y);
+    }
+  }
+  else{
+    if (y1 > y2){
+      x = x2; x2 = x1; x1 = x;
+      y = y2; y2 = y1; y1 = y;
+    }
+    else{
+      x = x1;
+      y = y1;
+    }
+    set_pixel(x, y);
+    end = y2;
+    sign = x2 < x1 ? -1 : 1;
+    p = 2 * dx - dy;
+    const1 = 2 * dx;
+    const2 = 2 * (dx - dy);
+    while (y < end){
+      y++;
+      if (p < 0)
+        p += const1;
+      else{
+        x += sign;
+        p += const2;
+      }
+      set_pixel(x, y);
+    }
+  }
 }
