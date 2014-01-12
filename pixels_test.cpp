@@ -71,8 +71,4 @@ int main()
       printf("Wrong color readback, expected %08x but got %08x\n", col ^ col2, col3);
   }
 
-  /* Line */
-  p.set_color(BLACK);
-  for (int y = 0; y < 500; y = y + 5)
-    p.line(0, y, p.get_kols() - 1, p.get_rows() - 1 - y);
 }

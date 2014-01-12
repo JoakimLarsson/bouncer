@@ -71,6 +71,7 @@ void  pixels::set_color(U32 c)
   pcurcol = (U32) c;
 }
 
+#if 0
 void pixels::line(U32 x1, U32 y1, U32 x2, U32 y2)
 {
   int dx,dy,p,const1, const2, x, y, sign, end;
@@ -131,3 +132,4 @@ void pixels::line(U32 x1, U32 y1, U32 x2, U32 y2)
     }
   }
 }
+#endif
