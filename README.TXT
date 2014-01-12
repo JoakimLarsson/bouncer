@@ -14,7 +14,7 @@ instantiable for multiple 3D boxes and for a while I used it as a dream box stai
 at the balls trying to find patterns in the simulation. I experiemented with setting
 the speed and direction of the balls according to different algorithms and also 
 implemented pause functions, single step and reverse. I guess I was understimulated
-during this time in my life.
+during this time of my life.
 
 Now, I am going back to the native implementation for Raspberry Pi and while not
 understimulated myself anymore I want to share this code on GitHub for others to 
