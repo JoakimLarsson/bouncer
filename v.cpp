@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #include "public.h"
-#include "viewer.h"
+#include "viewer.hh"
 
 #if BORLAND
 #include "graphics.h"

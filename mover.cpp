@@ -64,7 +64,7 @@ void mover::move()
 
 void mover::setup_increments()
 {
-   double kvot = speed / sqrt(dx * dx + dy * dy + dz * dz);
+   double kvot = speed / double sqrt(dx * dx + dy * dy + dz * dz);
    dsx = (int) ((dx << 4) * kvot);
    dsy = (int) ((dy << 4) * kvot);
    dsz = (int) ((dz << 4) * kvot);

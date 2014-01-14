@@ -153,11 +153,11 @@ void viewer::vline(linetype *lin)
        (lin->sy2 - Py2) ){
 
     grf -> set_color((U32)BLACK);
-    ((class grafport *)grf) -> portline(lin->sx1, lin->sy1,	// erase old line
+    ((class grafport *)grf) -> pline(lin->sx1, lin->sy1,	// erase old line
 	                        lin->sx2, lin->sy2 );
 
     grf -> set_color((U32)WHITE);
-    ((class grafport *)grf) -> portline(lin->sx1 = Px1, //Draw new line and save it
+    ((class grafport *)grf) -> pline(lin->sx1 = Px1, //Draw new line and save it
     	                        lin->sy1 = Py1,
 				lin->sx2 = Px2,
 				lin->sy2 = Py2);

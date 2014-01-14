@@ -41,7 +41,7 @@ void cross::erase()
 
   (view->grf) -> set_color((U32)BLACK);
   for (i = 0; i < 3; i++){
-    ((class grafport *)(view->grf)) -> portline( lin[i].sx1, lin[i].sy1,	// erase old lines
+    ((class grafport *)(view->grf)) -> pline( lin[i].sx1, lin[i].sy1,	// erase old lines
                           lin[i].sx2, lin[i].sy2 );
 
     lin[i].sx1 = lin[i].sy1 = lin[i].sx2 = lin[i].sy2 = (S16) 0;
