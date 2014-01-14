@@ -22,9 +22,9 @@ private:
   void clip_min(line3Dtype *lin, S32 minZ);
   int  clipZ(line3Dtype *lin);
 public:
-  class pixels *grf;
+  class grafport *grf;
 
-       viewer(class pixels *g);
+       viewer(class grafport *g);
 
   void inc_zoom(){ };
   void dec_zoom(){ };

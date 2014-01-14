@@ -23,7 +23,7 @@ void viewer::calc_const()
 }
 
 
-viewer::viewer(class pixels *g)
+viewer::viewer(class grafport *g)
 {
   grf = g; // graphics class interface to display hardware
 
