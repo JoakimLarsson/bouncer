@@ -38,14 +38,13 @@ void bouncer::erase()
 
   (view->grf) -> set_color((U32)BLACK);
   for (i = 0; i < 12; i++){
-    ((class grafport *)(view->grf)) -> portline( lin[i].sx1, lin[i].sy1,	// erase old lines
+    ((class grafport *)(view->grf)) -> pline( lin[i].sx1, lin[i].sy1,	// erase old lines
                           lin[i].sx2, lin[i].sy2 );
 
     lin[i].sx1 = lin[i].sy1 = lin[i].sx2 = lin[i].sy2 = (S16) 0;
   }
 }
 
-void bouncer::setup_lines()
 {
   lines[0].x1 = min_x; lines[0].y1 = min_y; lines[0].z1 = min_z; 
   lines[0].x2 = max_x; lines[0].y2 = min_y; lines[0].z2 = min_z; 

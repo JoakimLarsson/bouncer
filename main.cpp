@@ -6,7 +6,7 @@ main(){
 
   class pixels pixmap();
 
-  printf("Pixmap %d,%d,%d\n", pixmap.get_rows(), pixmap.get_rows(), pixmap.get_rows(), get_depth());
+  printf("Pixmap %d,%d,%d\n", pixmap.get_rows(), pixmap.get_rows(), pixmap.get_rows(), pixmap.get_depth());
 
   gport = new grafport();
   gport->set_div(3);
