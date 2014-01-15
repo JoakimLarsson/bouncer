@@ -5,19 +5,19 @@
 #include <math.h>
 
 #include "public.h"
-
+#include "bouncer.hh"
 #include "mover.hh"
 
 #define RAD (2<<4)
 
-class cross:public mover {
+class cross:public bouncer {
   line3Dtype 	curlines[3];
   U32		curang;
   linetype 	lin[3];
 
 public:
-
-        cross(class viewer *v);
+  U32           color;
+  cross(class viewer *v);
   void  init_trig();
   void	draw();
   void	erase();

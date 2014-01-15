@@ -13,11 +13,11 @@
 #include "bouncer.hh"
 #include "viewer.hh"
 
-static line3Dtype lines[] = {
+static line3Dtype clines[] = {
 
-    -RAD, -RAD,    0,  RAD,  RAD,    0,
-    -RAD,  RAD,    0,  RAD, -RAD,    0,
-       0,    0, -RAD,    0,    0,  RAD };
+  {-RAD, -RAD,    0,  RAD,  RAD,    0},
+  {-RAD,  RAD,    0,  RAD, -RAD,    0},
+  {    0,    0, -RAD,    0,    0,  RAD} };
 
 cross::cross(class viewer *v)
 {
@@ -30,7 +30,7 @@ cross::cross(class viewer *v)
     lin[i].sy1 =
     lin[i].sx2 =
     lin[i].sy2 = (S16) 0;
-    curlines[i] = lines[i];
+    curlines[i] = clines[i];
   }
   curang = 90;
 };
@@ -56,29 +56,14 @@ void cross::draw()
 
   curang = (curang + 1) % 360;
 
+  // Initialize from const cross objects
   for(i = 0; i < 3; i++)
-    curlines[i] = lines[i];
+    curlines[i] = clines[i];
 
-#if 0
-  for  (i = 0; i < 2; i++){
-    xprim = curlines[i].x1 * cos(curang) -
-    	    curlines[i].y1 * sin(curang);
-    yprim = curlines[i].y1 * cos(curang) +
-    	    curlines[i].x1 * sin(curang);
-    curlines[i].x1 = xprim;
-    curlines[i].y1 = yprim;
-    xprim = curlines[i].x2 * cos(curang) -
-    	    curlines[i].y2 * sin(curang);
-    yprim = curlines[i].y2 * cos(curang) +
-    	    curlines[i].x2 * sin(curang);
-    curlines[i].x2 = xprim;
-    curlines[i].y2 = yprim;
-  }
-#endif
-
+  // Draw each line
   for (i = 0; i < 3; i++){
     lin[i].line3D = curlines[i];
+    (view->grf) -> set_color(color);
     mline(&lin[i]);
-//    getch();
   }
 }
