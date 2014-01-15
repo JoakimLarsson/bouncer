@@ -94,33 +94,10 @@ void viewer::vline(linetype *lin)
   S32 tmp, x, y, z;
   line3Dtype line3D;
 
-#if DEBUG
-  fprintf(debugio, "vline: %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f\n",
-  ((float) lin->line3D.x1)/16, ((float) lin->line3D.y1)/16, 
-  ((float) lin->line3D.z1)/16, ((float) lin->line3D.x2)/16,
-  ((float) lin->line3D.y2)/16, ((float) lin->line3D.z2)/16 );
-#endif
-
   line3D = lin -> line3D;
   tmp = get_px(); line3D.x1 -= tmp; line3D.x2 -= tmp;
   tmp = get_py(); line3D.y1 -= tmp; line3D.y2 -= tmp;
   tmp = get_pz(); line3D.z1 -= tmp; line3D.z2 -= tmp;
-
-#if DEBUG
-  fprintf(debugio, "vline2: %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f\n",
-  ((float) line3D.x1)/16, ((float) line3D.y1)/16, 
-  ((float) line3D.z1)/16, ((float) line3D.x2)/16,
-  ((float) line3D.y2)/16, ((float) line3D.z2)/16 );
-#endif
-
-#if 0
-  if (clipZ(&line3D)){
-    grf -> set_color((U32)BLACK);
-    ((class pixels *)grf) -> gline(lin->sx1, lin->sy1,	// erase old line
-	                           lin->sx2, lin->sy2 );
-    return;
-  }
-#endif
 
 // Calculate new line
   x = line3D.x1;
@@ -130,8 +107,6 @@ void viewer::vline(linetype *lin)
   Tx = (x * dTx)/dVx + Tx1 ;
   Ty = (y * dTy)/dVy + Ty1 ;
 
-//  Px1 = ( ((Tx - x ) * (z - Vz1) ) / dVz + x - Vx1 ) >> 2;
-//  Py1 = ( ((Ty - y ) * (z - Vz1) ) / dVz + y - Vy1 ) >> 2;
   Px1 = ( ((Tx - x ) * (z - Vz1) ) / dVz + x + (dVx >> 1)) >> 2;
   Py1 = ( ((Ty - y ) * (z - Vz1) ) / dVz + y + (dVy >> 1)) >> 2;
 
@@ -142,8 +117,6 @@ void viewer::vline(linetype *lin)
   Tx = (x * dTx)/dVx + Tx1;
   Ty = (y * dTy)/dVy + Ty1;
 
-//  Px2 = ( ((Tx - x ) * (z - Vz1) ) / dVz + x - Vx1 ) >> 2;
-//  Py2 = ( ((Ty - y ) * (z - Vz1) ) / dVz + y - Vy1 ) >> 2;
   Px2 = ( ((Tx - x ) * (z - Vz1) ) / dVz + x + (dVx >> 1)) >> 2;
   Py2 = ( ((Ty - y ) * (z - Vz1) ) / dVz + y + (dVy >> 1)) >> 2;
 
