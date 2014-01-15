@@ -1,6 +1,9 @@
 Bouncer
 =======
 
+Background
+----------
+
 A really low level 3D simulation of "balls" bouncing in boxes. Yes I did one too. :-)
 
 The project started out on my Macintosh SE somewhere around 1989 using Think C which 
@@ -20,5 +23,10 @@ during this period of time in my life.
 Now, I am going back to the native implementation for Raspberry Pi and while not
 understimulated myself anymore I want to share this code on GitHub for others to 
 ponder. I also need to refresh my C++ skills a bit so this is the way I choose to do it.
+
+Usage
+-----
+Right now 'make cross' is the only target that results in an entertaining executable
+
 
 Joakim Larsson
