@@ -26,17 +26,7 @@ inline S32 mover::get_pz(){ return (boun != (class bouncer *) 0L) ?
 
 void mover::mline(linetype *lin)
 {
-
-#if DEBUG
-  getch();
-  gotoxy(1,1);
-  clrscr();
-  fprintf(debugio, "mline: %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f\n",
-  ((float) lin->line3D.x1)/16, ((float) lin->line3D.y1)/16, 
-  ((float) lin->line3D.z1)/16, ((float) lin->line3D.x2)/16,
-  ((float) lin->line3D.y2)/16, ((float) lin->line3D.z2)/16 );
-#endif
-
+  // Add local world coordinates
   lin->line3D.x1 += get_px(); // px + boun -> px;
   lin->line3D.y1 += get_py(); // py + boun -> py;
   lin->line3D.z1 += get_pz(); // pz + boun -> pz;
@@ -64,7 +54,7 @@ void mover::move()
 
 void mover::setup_increments()
 {
-   double kvot = speed / double sqrt(dx * dx + dy * dy + dz * dz);
+  double kvot = speed / (double) sqrt(dx * dx + dy * dy + dz * dz);
    dsx = (int) ((dx << 4) * kvot);
    dsy = (int) ((dy << 4) * kvot);
    dsz = (int) ((dz << 4) * kvot);
