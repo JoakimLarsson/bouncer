@@ -31,7 +31,7 @@ int main(){
 
   while(1){
     for (int i = 0; i < MAXOBJ; i++){
-      usleep(2000);
+      usleep(700);
       obj[i]->move();
       (obj[i]->boun)->bounce_detect(obj[i]);
       obj[i]->draw();

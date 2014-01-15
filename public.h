@@ -4,7 +4,7 @@
 
 #define BORLAND 0	/* 0 if we are NOT using Borland C++ */
 #define DEBUG 0
-#define MAXOBJ 23
+#define MAXOBJ 20
 #define WHITE 0x0000ffff
 #define BLACK 0x00000000
 
