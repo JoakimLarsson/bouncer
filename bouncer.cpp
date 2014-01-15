@@ -45,6 +45,7 @@ void bouncer::erase()
   }
 }
 
+void bouncer::setup_lines()
 {
   lines[0].x1 = min_x; lines[0].y1 = min_y; lines[0].z1 = min_z; 
   lines[0].x2 = max_x; lines[0].y2 = min_y; lines[0].z2 = min_z; 

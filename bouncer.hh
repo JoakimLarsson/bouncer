@@ -17,9 +17,9 @@ private:
   
   void setup_lines();	// help function
 public:
-        bouncer();
-  void	draw();
-  void	erase();
+       bouncer();
+  void draw();
+  void erase();
 
   void bounce_limits(S32 x1, S32 y1, S32 z1, S32 x2, S32 y2, S32 z2);
   void bounce_detect(class mover *t);
