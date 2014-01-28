@@ -12,10 +12,27 @@ int main()
 {
   class pixels p;
   int col2;
+  unsigned int white, black, red, green, blue;
+
+  if (p.get_depth() == 16){
+    white = WHITE16;
+    black = BLACK16;
+    red = RED16;
+    blue = BLUE16;
+    green = GREEN16;
+  }
+  else if (p.get_depth() == 32){
+    white = WHITE32;
+    black = BLACK32;
+    red = RED32;
+    blue = BLUE32;
+    green = GREEN32;
+  }
+
 
   /* Fill some squares, check pixel aspect ratio */
-  printf("Color readback, got %08x\n", WHITE);
-  p.set_color(WHITE);
+  printf("Color fill, put %08x\n", white);
+  p.set_color(white);
   for (int x = 0; x < (int) p.get_kols(); x++)
     for (int y = 0; y < (int) p.get_rows(); y++)
       p.set_pixel(x, y);
@@ -23,19 +40,19 @@ int main()
   col2 = p.get_pixel(500,500);
   printf("Color readback, got %08x\n", col2);
 
-  p.set_color(BLUE);
+  p.set_color(blue);
   for (int x = 0; x < 100; x++)
     for (int y = 0; y < 100; y++)
       p.set_pixel(50 + x,50 + y);
-  p.set_color(GREEN);
+  p.set_color(green);
   for (int x = 0; x < 100; x++)
     for (int y = 0; y < 100; y++)
       p.set_pixel(150 + x,50 + y);
-  p.set_color(RED);
+  p.set_color(red);
   for (int x = 0; x < 100; x++)
     for (int y = 0; y < 100; y++)
       p.set_pixel(150 + x,150 + y);
-  p.set_color(BLACK);
+  p.set_color(black);
   for (int x = 0; x < 100; x++)
     for (int y = 0; y < 100; y++)
       p.set_pixel(50 + x,150 + y);
