@@ -30,8 +30,8 @@ pixels::pixels()
   base = (U8 *) mmap(NULL, pkols * prows * pbytes, PROT_WRITE | PROT_READ, MAP_SHARED, fb0, 0);
   
   /* clear display */
-  memset(base, BLACK, pkols * prows * pbytes);
-  set_color(WHITE);
+  memset(base, pdept == 16 ? BLACK16 : BLACK32 , pkols * prows * pbytes);
+  set_color(pdept == 16 ? WHITE16 : WHITE32);
 }
 
 pixels::~pixels()
@@ -41,14 +41,17 @@ pixels::~pixels()
 
 void pixels::set_pixel(U32 x, U32 y)
 {
-  /* Support for 16 bit RGB565 (RPi) */
+  /* Support for 16 bit RGB565 (RPi) boot default on HDMI */
   if (pbytes == 2){ 
     *((U8 *)(base + (pkols * y + x) * pbytes + 1)) = (pcurcol >> 8) & 0xff; 
     *((U8 *)(base + (pkols * y + x) * pbytes    )) = (pcurcol >> 0) & 0xff; 
   }
-  /* Support for 32 bit RGB888 */
+  /* Support for 32 bit RGB888 (RPi) fbset 1280x960-75-32 R&B swapped */
   else if (pbytes == 4){
-    *((U32 *)(base + (pkols * y + x) * pbytes)) = pcurcol; 
+    *((U8 *)(base + (pkols * y + x) * pbytes) + 2) = (pcurcol)       & 0xff; 
+    *((U8 *)(base + (pkols * y + x) * pbytes) + 1) = (pcurcol >>  8) & 0xff;
+    *((U8 *)(base + (pkols * y + x) * pbytes) + 0) = (pcurcol >> 16) & 0xff;
+    *((U8 *)(base + (pkols * y + x) * pbytes) + 3) = (pcurcol >> 24) & 0xff;
   }
 }
 
@@ -60,9 +63,13 @@ U32 pixels::get_pixel(U32 x, U32 y)
       (*((U8 *)(base + pkols * y * pbytes + x * pbytes + 1)) << 8 ) |
       (*((U8 *)(base + pkols * y * pbytes + x * pbytes)));
   }
-  /* Support for 32 bit RGB888 */
+  /* Support for 32 bit RGB888 fbset 1280x960-75-32 R&B swapped */
   else if (pbytes == 4){
-    pixel = *((U32 *)(base + (pkols * y + x) * pbytes)) & 0x00ffffff; 
+    pixel = 
+      (*((U8 *)(base + pkols * y * pbytes + x * pbytes + 3)) << 24 ) |
+      (*((U8 *)(base + pkols * y * pbytes + x * pbytes + 0)) << 16 ) |
+      (*((U8 *)(base + pkols * y * pbytes + x * pbytes + 1)) <<  8 ) |
+      (*((U8 *)(base + pkols * y * pbytes + x * pbytes + 2)) <<  0 );
   }
   /* Uknown pixel depth */
   else {
@@ -78,8 +85,13 @@ void pixels::xor_pixel(U32 x, U32 y)
   if (pbytes == 2){ 
     *((U8 *)(base + (pkols * y + x) * pbytes + 1)) = (pcurcol >> 8) ^  get_pixel(x, y) >> 8;
     *((U8 *)(base + (pkols * y + x) * pbytes    )) = pcurcol        ^  get_pixel(x, y);
-    //    memset(base + pbytes * x + pbytes * pkols * y,      pcurcol       ^  get_pixel(x, y), 1);
-    //    memset(base + pbytes * x + pbytes * pkols * y + 1, (pcurcol >> 8) ^ (get_pixel(x, y) >> 8), 1);
+  }
+  /* Support for 32 bit RGB888 fbset 1280x960-75-32 R&B swapped */
+  else if (pbytes == 4){
+    *((U8 *)(base + (pkols * y + x) * pbytes + 3)) = (pcurcol >> 24) ^  get_pixel(x, y) >> 24;
+    *((U8 *)(base + (pkols * y + x) * pbytes + 0)) = (pcurcol >> 16) ^  get_pixel(x, y) >> 16;
+    *((U8 *)(base + (pkols * y + x) * pbytes + 1)) = (pcurcol >>  8) ^  get_pixel(x, y) >>  8;
+    *((U8 *)(base + (pkols * y + x) * pbytes + 2)) = (pcurcol >>  0) ^  get_pixel(x, y);
   }
 }
 
