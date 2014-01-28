@@ -5,7 +5,19 @@
 
 #include "public.h"
 
-/* TODO: move fb0 to derived class keeping base class agnostic */
+/* 16 bit RGB565 colors */
+#define WHITE16 0x0000ffff
+#define BLACK16 0x00000000
+#define RED16   0x0000f800
+#define GREEN16 0x000007e0
+#define BLUE16  0x0000001f
+
+/* 32 bit RGB888 colors */
+#define WHITE32 0xffffffff
+#define BLACK32 0xff000000
+#define RED32   0xffff0000
+#define GREEN32 0xff00ff00
+#define BLUE32  0xff0000ff
 
 class pixels{
 private:
