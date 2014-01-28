@@ -5,13 +5,6 @@
 #define BORLAND 0	/* 0 if we are NOT using Borland C++ */
 #define DEBUG 0
 #define MAXOBJ 20
-#define WHITE 0x0000ffff
-#define BLACK 0x00000000
-
-/* 16 bit RGB565 colors */
-#define RED   0x0000f800
-#define GREEN 0x000007e0
-#define BLUE  0x0000001f
 
 #if BORLAND<1
 #define far
