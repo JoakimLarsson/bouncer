@@ -123,7 +123,7 @@ void viewer::vline(linetype *lin)
   if ( (lin->sx1 - Px1) || // Redraw only if the line has moved...
        (lin->sy1 - Py1) ||
        (lin->sx2 - Px2) ||          // This test pays off!!
-       (lin->sy2 - Py2) ){
+       (lin->sy2 - Py2) ){          // But inhibits redraw of static objects...
 
     grf -> set_color((U32)BLACK);
     ((class grafport *)grf) -> pline(lin->sx1, lin->sy1,	// erase old line
