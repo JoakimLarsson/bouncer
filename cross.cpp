@@ -32,7 +32,6 @@ cross::cross(class viewer *v)
     lin[i].sy2 = (S16) 0;
     curlines[i] = clines[i];
   }
-  curang = 90;
 };
 
 void cross::erase()
@@ -52,9 +51,6 @@ void cross::erase()
 void cross::draw()
 {
   int i;
-  S32 xprim, yprim;
-
-  curang = (curang + 1) % 360;
 
   // Initialize from const cross objects
   for(i = 0; i < 3; i++)

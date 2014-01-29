@@ -12,7 +12,6 @@
 
 class cross:public bouncer {
   line3Dtype 	curlines[3];
-  U32		curang;
   linetype 	lin[3];
 
 public:
