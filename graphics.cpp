@@ -6,7 +6,6 @@
 #include "pixels.hh"
 #include "graphics.hh"
 
-
 void graphics::gline(U32 x1, U32 y1, U32 x2, U32 y2)
 {
   S16 dx,dy,p,const1, const2, x, y, sign, end;
