@@ -5,6 +5,13 @@
 
 #include "public.h"
 
+#define WHITE 1
+#define BLACK 2
+#define RED   3
+#define GREEN 4
+#define BLUE  5
+
+
 /* 16 bit RGB565 colors */
 #define WHITE16 0x0000ffff
 #define BLACK16 0x00000000

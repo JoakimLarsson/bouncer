@@ -97,6 +97,13 @@ void pixels::xor_pixel(U32 x, U32 y)
 
 void  pixels::set_color(U32 c)
 {
-  pcurcol = (U32) c;
+  switch (c){
+  case RED:   pcurcol = pbytes == 2 ? RED16   : RED32; break;
+  case GREEN: pcurcol = pbytes == 2 ? GREEN16 : GREEN32; break;
+  case BLUE:  pcurcol = pbytes == 2 ? BLUE16 : BLUE32; break;
+  case WHITE: pcurcol = pbytes == 2 ? WHITE16 : WHITE32; break;
+  case BLACK: // - fall though to default
+  default:    pcurcol = pbytes == 2 ? BLACK16 : BLACK32; 
+  }
 }
 
