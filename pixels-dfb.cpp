@@ -1,18 +1,55 @@
-#include <linux/fb.h>
-#include <fcntl.h>
+/*
+ * DirectFb implementation
+ */
+
+//#include <linux/fb.h>
+//#include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/ioctl.h>
-#include <sys/mman.h>
+#include <directfb.h>
+//#include <stdlib.h>
+//#include <string.h>
+//#include <sys/ioctl.h>
+//#include <sys/mman.h>
 
 #include "public.h"
 
 #include "pixels.hh"
 
+#define DFBCHECK(x...)                                         \
+  {                                                            \
+    DFBResult err = x;                                         \
+    							       \
+    if (err != DFB_OK)                                         \
+      {                                                        \
+	fprintf( stderr, "%s <%d>:\n\t", __FILE__, __LINE__ ); \
+	DirectFBErrorFatal( #x, err );                         \
+      }                                                        \
+  }
+
+static IDirectFB *dfb = NULL;
+static IDirectFBSurface *primary = NULL;
+
 pixels::pixels()
 {
+  int argc = 0;
+  char **argv;
+  int rows, kols;
+
+  DFBSurfaceDescription dsc;
+
+  DFBCHECK (DirectFBInit (&argc, &argv));
+  DFBCHECK (DirectFBCreate (&dfb));
+  DFBCHECK (dfb->SetCooperativeLevel (dfb, DFSCL_FULLSCREEN));
+
+  dsc.flags = DSDESC_CAPS;
+  dsc.caps  = (DFBSurfaceCapabilities) (DSCAPS_PRIMARY | DSCAPS_FLIPPING);
+  DFBCHECK (dfb->CreateSurface( dfb, &dsc, &primary ));
+  DFBCHECK (primary->GetSize(primary, &kols, &rows));
+  pkols = (U32) kols;
+  prows = (U32) rows;
+
+#if 0
   struct fb_var_screeninfo fb_info; /* info structure for framebuffer */
 
   if ((fb0 = open("/dev/fb0", O_RDWR)) == -1){
@@ -32,11 +69,14 @@ pixels::pixels()
   /* clear display */
   memset(base, pdept == 16 ? BLACK16 : BLACK32 , pkols * prows * pbytes);
   set_color(pdept == 16 ? WHITE16 : WHITE32);
+#endif
 }
 
 pixels::~pixels()
 {
+#if 0
   close(fb0);
+#endif
 }
 
 void pixels::set_pixel(U32 x, U32 y)
