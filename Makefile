@@ -2,19 +2,19 @@ CC=g++
 CFLAGS=-c -Wall -fno-exceptions -fno-rtti
 LDFLAGS=
 
-PIXELS_SOURCES=pixels_test.cpp pixels.cpp
+PIXELS_SOURCES=pixels_test.cpp pixels-fb.cpp
 PIXELS_OBJECTS=$(PIXELS_SOURCES:.cpp=.o)
 
-GRAPHICS_SOURCES=graphics_test.cpp graphics.cpp pixels.cpp
+GRAPHICS_SOURCES=graphics_test.cpp graphics.cpp pixels-fb.cpp
 GRAPHICS_OBJECTS=$(GRAPHICS_SOURCES:.cpp=.o)
 
-GRAFPORT_SOURCES=grafport_test.cpp grafport.cpp pixels.cpp graphics.cpp
+GRAFPORT_SOURCES=grafport_test.cpp grafport.cpp pixels-fb.cpp graphics.cpp
 GRAFPORT_OBJECTS=$(GRAFPORT_SOURCES:.cpp=.o)
 
-CROSS_SOURCES=cross_test.cpp cross.cpp pixels.cpp graphics.cpp viewer.cpp mover.cpp grafport.cpp bouncer.cpp
+CROSS_SOURCES=cross_test.cpp cross.cpp pixels-fb.cpp graphics.cpp viewer.cpp mover.cpp grafport.cpp bouncer.cpp
 CROSS_OBJECTS=$(CROSS_SOURCES:.cpp=.o)
 
-BOUNCER_SOURCES=bouncer_test.cpp bouncer.cpp pixels.cpp graphics.cpp viewer.cpp mover.cpp grafport.cpp
+BOUNCER_SOURCES=bouncer_test.cpp bouncer.cpp pixels-fb.cpp graphics.cpp viewer.cpp mover.cpp grafport.cpp
 BOUNCER_OBJECTS=$(BOUNCER_SOURCES:.cpp=.o)
 
 VIEWER_SOURCES=viewer_test.cpp viewer.cpp
