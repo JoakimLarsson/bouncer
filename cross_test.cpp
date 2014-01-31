@@ -6,7 +6,7 @@
 #include "viewer.hh"
 #include "grafport.hh"
 
-#define CROSSES 3
+#define CROSSES 123
 
 int main(){
   class mover    *obj[CROSSES];

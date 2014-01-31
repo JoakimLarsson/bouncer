@@ -1,9 +1,9 @@
 
 # Device specific implementation, enable just one
-#PIXELS=pixels-fb.cpp
-PIXELS=pixels-dfb.cpp
-PIXELS_CFLAGS=-I/usr/include/directfb
-PIXELS_LDFLAGS=-ldirectfb
+PIXELS=pixels-fb.cpp
+#PIXELS=pixels-dfb.cpp
+#PIXELS_CFLAGS=-I/usr/include/directfb
+#PIXELS_LDFLAGS=-ldirectfb
 
 CC=g++
 CFLAGS=-c -Wall -fno-exceptions -fno-rtti $(PIXELS_CFLAGS)
