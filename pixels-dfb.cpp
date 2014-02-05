@@ -14,7 +14,7 @@
 
 #include "public.h"
 
-#include "pixels.hh"
+#include "pixels-dfb.hh"
 
 #define DFBCHECK(x...)                                         \
   {                                                            \
@@ -27,8 +27,8 @@
       }                                                        \
   }
 
-static IDirectFB *dfb = NULL;
-static IDirectFBSurface *primary = NULL;
+//static IDirectFB *dfb = NULL;
+//static IDirectFBSurface *primary = NULL;
 
 pixels::pixels()
 {
@@ -37,6 +37,9 @@ pixels::pixels()
   int rows, kols;
 
   DFBSurfaceDescription dsc;
+
+  dfb = NULL;
+  primary = NULL;
 
   DFBCHECK (DirectFBInit (&argc, &argv));
   DFBCHECK (DirectFBCreate (&dfb));
@@ -74,13 +77,17 @@ pixels::pixels()
 
 pixels::~pixels()
 {
-#if 0
-  close(fb0);
-#endif
+  primary->Release( primary );
+  dfb->Release( dfb );
 }
 
 void pixels::set_pixel(U32 x, U32 y)
 {
+
+  DFBCHECK (primary->DrawLine( primary, x, y, x, y )); // One pixel line...
+
+
+#if 0
   /* Support for 16 bit RGB565 (RPi) boot default on HDMI */
   if (pbytes == 2){ 
     *((U8 *)(base + (pkols * y + x) * pbytes + 1)) = (pcurcol >> 8) & 0xff; 
@@ -93,10 +100,12 @@ void pixels::set_pixel(U32 x, U32 y)
     *((U8 *)(base + (pkols * y + x) * pbytes) + 0) = (pcurcol >> 16) & 0xff;
     *((U8 *)(base + (pkols * y + x) * pbytes) + 3) = (pcurcol >> 24) & 0xff;
   }
+#endif
 }
 
 U32 pixels::get_pixel(U32 x, U32 y)
 {
+#if 0
   U32 pixel;
   if (pbytes == 2){
     pixel = 
@@ -115,12 +124,13 @@ U32 pixels::get_pixel(U32 x, U32 y)
   else {
     pixel = 0xffffffff; /* -1 */
   }
-
-  return pixel;
+#endif
+  return 0xffffffff;
 }
 
 void pixels::xor_pixel(U32 x, U32 y)
 {
+#if 0
   /* Support for 16 bit RGB565 (RPi) */
   if (pbytes == 2){ 
     *((U8 *)(base + (pkols * y + x) * pbytes + 1)) = (pcurcol >> 8) ^  get_pixel(x, y) >> 8;
@@ -133,10 +143,12 @@ void pixels::xor_pixel(U32 x, U32 y)
     *((U8 *)(base + (pkols * y + x) * pbytes + 1)) = (pcurcol >>  8) ^  get_pixel(x, y) >>  8;
     *((U8 *)(base + (pkols * y + x) * pbytes + 2)) = (pcurcol >>  0) ^  get_pixel(x, y);
   }
+#endif
 }
 
 void  pixels::set_color(U32 c)
 {
+#if 0
   switch (c){
   case RED:   pcurcol = pbytes == 2 ? RED16   : RED32; break;
   case GREEN: pcurcol = pbytes == 2 ? GREEN16 : GREEN32; break;
@@ -145,5 +157,6 @@ void  pixels::set_color(U32 c)
   case BLACK: // - fall though to default
   default:    pcurcol = pbytes == 2 ? BLACK16 : BLACK32; 
   }
+#endif
 }
 
