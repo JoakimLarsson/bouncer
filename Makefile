@@ -39,28 +39,28 @@ CLEAN_LIST = $(PIXELS_OBJECTS) $(CROSS_OBJECTS) $(VIEWER_OBJECTS) $(GRAPHICS_OBJ
 #all: $(SOURCES) $(EXECUTABLES)
 
 #$(EXECUTABLES): $(OBJECTS) $(HEADERS)
-#	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+#	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) 
 
 pixels: $(PIXELS_OBJECTS) public.h pixels.hh Makefile
-	$(CC) $(LDFLAGS) $(PIXELS_OBJECTS) -o $@
+	$(CC) $(PIXELS_OBJECTS) -o $@ $(LDFLAGS) 
 
 graphics: $(GRAPHICS_OBJECTS) graphics.hh pixels.hh Makefile
-	$(CC) $(LDFLAGS) $(GRAPHICS_OBJECTS) -o $@
+	$(CC) $(GRAPHICS_OBJECTS) -o $@ $(LDFLAGS) 
 
 grafport: $(GRAFPORT_OBJECTS) grafport.hh pixels.hh Makefile
-	$(CC) $(LDFLAGS) $(GRAFPORT_OBJECTS) -o $@
+	$(CC) $(GRAFPORT_OBJECTS) -o $@ $(LDFLAGS) 
 
 cross: $(CROSS_OBJECTS) $(HEADERS) public.h Makefile
-	$(CC) $(LDFLAGS) $(CROSS_OBJECTS) -o $@
+	$(CC) $(CROSS_OBJECTS) -o $@ $(LDFLAGS) 
 
 bouncer: $(BOUNCER_OBJECTS) $(HEADERS) public.h Makefile
-	$(CC) $(LDFLAGS) $(BOUNCER_OBJECTS) -o $@
+	$(CC) $(BOUNCER_OBJECTS) -o $@ $(LDFLAGS) 
 
 viewer: $(VIEWER_OBJECTS) $(HEADERS) public.h Makefile
-	$(CC) $(LDFLAGS) $(VIEWER_OBJECTS) -o $@
+	$(CC) $(VIEWER_OBJECTS) -o $@ $(LDFLAGS) 
 
 mover: $(MOVER_OBJECTS) $(HEADERS) public.h Makefile
-	$(CC) $(LDFLAGS) $(MOVER_OBJECTS) -o $@
+	$(CC) $(MOVER_OBJECTS) -o $@ $(LDFLAGS) 
 
 clean:
 	@- $(RM) $(CLEAN_LIST)
