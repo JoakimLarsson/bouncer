@@ -29,4 +29,4 @@ Usage
 Right now 'make cross' is the only target that results in an entertaining executable
 
 
-Joakim Larsson
+Joakim Larsson Edstrom
